@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from pynput.keyboard import Key, Controller
+### pip install PyUserInput
+
+from pykeyboard import *
 import time
 
-prog = """TO DRAWPIC :X :Y :ANGLE
+
+k = PyKeyboard() #建立键盘对象
+
+prog = """
+TO DRAWPIC :X :Y :ANGLE
  HOME
  PU
  SETXY :X :Y
@@ -30,10 +36,9 @@ END
 """
 
 time.sleep(5)
-
-keyboard = Controller()
-
-for k in prog:
-    keyboard.press(k)
-    keyboard.release(k)
-    #time.sleep(1)
+for c in prog:
+    if c == "\n":
+        k.tap_key(k.return_key)
+    else:
+        k.type_string(c)
+    time.sleep(0.1)
